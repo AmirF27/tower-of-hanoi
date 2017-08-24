@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-tower-of-hanoi',
+  selector: 'tower-of-hanoi',
   templateUrl: './tower-of-hanoi.component.html',
   styleUrls: ['./tower-of-hanoi.component.scss']
 })
 export class TowerOfHanoiComponent {
 
-  stacks = {
-    a: [5, 4, 3, 2, 1],
-    b: [],
-    c: []
-  }
+  stacks = [
+    [5, 4, 3, 2, 1],
+    [],
+    []
+  ];
 
   constructor() { }
 

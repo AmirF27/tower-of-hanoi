@@ -6,11 +6,11 @@ describe('TowerOfHanoiComponent', () => {
   let component: TowerOfHanoiComponent;
   let fixture: ComponentFixture<TowerOfHanoiComponent>;
 
-  let stacks = {
-    a: [5, 4, 3, 2, 1],
-    b: [],
-    c: []
-  }
+  const stacks = [
+    [5, 4, 3, 2, 1],
+    [],
+    []
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -30,9 +30,9 @@ describe('TowerOfHanoiComponent', () => {
   });
 
   it('should solve puzzle correctly', () => {
-    component.solve(stacks.a.length, stacks.a, stacks.c, stacks.b);
-    expect(stacks.a).toEqual([]);
-    expect(stacks.b).toEqual([]);
-    expect(stacks.c).toEqual([5, 4, 3, 2, 1]);
+    component.solve(stacks[0].length, stacks[0], stacks[1], stacks[2]);
+    expect(stacks[0]).toEqual([]);
+    expect(stacks[1]).toEqual([]);
+    expect(stacks[2]).toEqual([5, 4, 3, 2, 1]);
   });
 });

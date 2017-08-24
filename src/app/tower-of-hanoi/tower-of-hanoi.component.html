@@ -1,3 +1,14 @@
-<p>
-  tower-of-hanoi works!
-</p>
+<div class="peg peg--left"></div>
+<div class="peg peg--middle"></div>
+<div class="peg peg--right"></div>
+
+<ng-container *ngFor="let stack of stacks">
+  <ul *ngIf="stack.length > 0" class="stack">
+    <li *ngFor="let disk of stack" class="disk disk--{{disk}}"></li>
+  </ul>
+</ng-container>
+
+<select class="input input--dropdown">
+  <option *range="[5, 10]; let n" value="{{n}}">{{n}}</option>
+</select>
+<button type="button" class="button button--primary">Solve</button>
