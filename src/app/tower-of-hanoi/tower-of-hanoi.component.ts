@@ -17,6 +17,13 @@ export class TowerOfHanoiComponent implements OnInit {
 
   height: number = DEFAULT_HEIGHT;
 
+  // for use with naming CSS classes for the stacks
+  stackNames = [
+    'left',
+    'middle',
+    'right'
+  ];
+
   constructor() { }
 
   ngOnInit() {
@@ -27,7 +34,7 @@ export class TowerOfHanoiComponent implements OnInit {
     if (n > 0) {
       this.solve(n - 1, source, auxiliary, target);
 
-      target.push(source.pop());
+      target.unshift(source.shift());
 
       this.solve(n - 1, auxiliary, target, source);
     }
@@ -39,10 +46,8 @@ export class TowerOfHanoiComponent implements OnInit {
     }
 
     for (let i = +this.height; i >= 1; i--) {
-      this.stacks[0].push(i);
+      this.stacks[0].unshift(i);
     }
-
-    console.log(this.stacks[0]);
   }
 
 }

@@ -1,0 +1,43 @@
+@import '../../assets/scss/variables';
+
+.peg {
+  background: $peg-color;
+  display: inline-block;
+  height: $peg-height;
+  margin: $peg-width;
+  width: $peg-width;
+}
+
+.stack {
+  left: 0;
+  list-style-type: none;
+  position: relative;
+  transition: left 0.3s;
+}
+
+@keyframes left-to-right {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: 200px;
+  }
+}
+
+.stack--right {
+  animation-name: left-to-right;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.disk {
+  height: $disk-height;
+}
+
+@for $i from 1 through 10 {
+  .disk--#{$i} {
+    background: #000;
+    width: $i * 60px;
+  }
+}
