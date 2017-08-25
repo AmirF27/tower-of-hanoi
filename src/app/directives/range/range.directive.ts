@@ -14,6 +14,10 @@ export class RangeDirective {
 
   @Input()
   set range(r: number[]) {
+    if (r.length != 2) {
+      throw new Error('Range array should have exactly 2 elements');
+    }
+
     this.viewContainer.clear();
     this._range = this.generateRange(r[0], r[1]);
 

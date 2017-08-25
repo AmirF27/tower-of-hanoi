@@ -1,14 +1,21 @@
 import { TestBed, async } from '@angular/core/testing';
 
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { TowerOfHanoiComponent } from './tower-of-hanoi/tower-of-hanoi.component';
+import { RangeDirective } from './directives/range/range.directive';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule
+      ],
       declarations: [
         AppComponent,
-        TowerOfHanoiComponent
+        TowerOfHanoiComponent,
+        RangeDirective
       ],
     }).compileComponents();
   }));

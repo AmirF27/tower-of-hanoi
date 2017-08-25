@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { FormsModule } from '@angular/forms';
+
+import { RangeDirective } from '../directives/range/range.directive';
 import { TowerOfHanoiComponent } from './tower-of-hanoi.component';
 
 describe('TowerOfHanoiComponent', () => {
@@ -8,7 +11,13 @@ describe('TowerOfHanoiComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TowerOfHanoiComponent ]
+      imports: [
+        FormsModule
+      ],
+      declarations: [
+        TowerOfHanoiComponent,
+        RangeDirective
+      ]
     })
     .compileComponents();
   }));
@@ -30,7 +39,7 @@ describe('TowerOfHanoiComponent', () => {
       []
     ];
 
-    component.solve(stacks[0].length, stacks[0], stacks[1], stacks[2]);
+    component.solve(stacks[0].length, stacks[0], stacks[2], stacks[1]);
     expect(stacks[0]).toEqual([]);
     expect(stacks[1]).toEqual([]);
     expect(stacks[2]).toEqual([5, 4, 3, 2, 1]);

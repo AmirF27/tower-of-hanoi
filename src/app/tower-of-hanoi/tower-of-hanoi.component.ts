@@ -34,9 +34,9 @@ export class TowerOfHanoiComponent implements OnInit {
   }
 
   resetStacks() {
-    this.stacks[0] = [];
-    this.stacks[1] = [];
-    this.stacks[2] = [];
+    for (let index in this.stacks) {
+      this.stacks[index] = [];
+    }
 
     for (let i = +this.height; i >= 1; i--) {
       this.stacks[0].push(i);
