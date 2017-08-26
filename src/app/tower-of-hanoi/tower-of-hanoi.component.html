@@ -31,5 +31,6 @@
 
 <button (click)="solve()"
   type="button"
-  class="button button--primary">Solve
+  class="button button--primary"
+  [disabled]="solving || solved">Solve
 </button>

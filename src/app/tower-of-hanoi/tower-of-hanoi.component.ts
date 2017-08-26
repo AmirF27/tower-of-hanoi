@@ -15,18 +15,15 @@ export class TowerOfHanoiComponent implements OnInit {
     [],
     []
   ];
-
   height: number = DEFAULT_HEIGHT;
-
   // for use with naming CSS classes for the stacks
   stackNames = [
     'left',
     'middle',
     'right'
   ];
-
+  solving: boolean = false;
   solved: boolean = false;
-
   delay: number = DEFAULT_DELAY;
 
   constructor() { }
@@ -49,21 +46,31 @@ export class TowerOfHanoiComponent implements OnInit {
 
   solve() {
     if (!this.solved) {
-      let first = 1, second = 2;
-      if (this.height % 2 != 0) {
-        [first, second] =  [second, first]
-      }
+      this.solving = true;
 
-      let it = this.executeMoves(first, second);
+      let { first, second } = this.determineMoveOrder();
+
+      let moves = this.initiateMoves(first, second);
       let interval = setInterval(() => {
-        if (it.next().done) {
+        if (moves.next().done) {
           clearInterval(interval);
+          this.solving = false;
         }
       }, this.delay);
     }
   }
 
-  private* executeMoves(first: number, second: number) {
+  private determineMoveOrder() {
+    let [first, second] = [1, 2];
+
+    if (this.height % 2 != 0) {
+      [first, second] = [second, first];
+    }
+
+    return { first, second };
+  }
+
+  private* initiateMoves(first: number, second: number) {
     while (!this.solved) {
       yield this.makeMove(this.stacks[0], this.stacks[first]);
       yield this.makeMove(this.stacks[0], this.stacks[second]);
@@ -72,7 +79,7 @@ export class TowerOfHanoiComponent implements OnInit {
   }
 
   private makeMove(stack1: Array<number>, stack2: Array<number>) {
-    var { source, target } = this.determineLegalMove(stack1, stack2);
+    let { source, target } = this.determineLegalMove(stack1, stack2);
 
     if (!this.checkSolved() && (source && target)) {
       target.unshift(source.shift());

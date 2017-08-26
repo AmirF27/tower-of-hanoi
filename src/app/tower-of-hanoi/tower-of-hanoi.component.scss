@@ -1,17 +1,19 @@
 @import '../../assets/scss/variables';
 
-.peg {
-  background: $peg-color;
-  display: inline-block;
-  height: $peg-height;
-  margin: $peg-width;
-  width: $peg-width;
-}
+// .peg {
+//   background: $peg-color;
+//   display: inline-block;
+//   height: $peg-height;
+//   margin: $peg-width;
+//   width: $peg-width;
+// }
 
 .stack {
+  bottom: 0;
+  display: inline-block;
   left: 0;
   list-style-type: none;
-  position: relative;
+  position: absolute;
   transition: left 0.3s;
 }
 
@@ -38,12 +40,14 @@
 }
 
 .disk {
+  border-radius: $disk-border-radius;
   height: $disk-height;
+  margin: 0 auto;
 }
 
 @for $i from 1 through 10 {
   .disk--#{$i} {
-    background: #000;
-    width: $i * 60px;
+    background: nth($disk-colors, $i);
+    width: $i * $disk-width-factor;
   }
 }
