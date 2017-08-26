@@ -15,20 +15,26 @@
   transition: left 0.3s;
 }
 
-@keyframes left-to-right {
-  from {
-    left: 0;
-  }
+// @keyframes left-to-right {
+//   from {
+//     left: 0;
+//   }
+//
+//   to {
+//     left: 200px;
+//   }
+// }
 
-  to {
-    left: 200px;
-  }
+.stack--middle {
+  left: 300px;
 }
 
 .stack--right {
-  animation-name: left-to-right;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
+  left: 600px;
+
+  // animation-name: left-to-right;
+  // animation-duration: 0.3s;
+  // animation-fill-mode: forwards;
 }
 
 .disk {

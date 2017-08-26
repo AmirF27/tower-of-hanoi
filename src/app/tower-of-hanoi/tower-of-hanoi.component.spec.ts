@@ -32,25 +32,22 @@ describe('TowerOfHanoiComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should solve puzzle correctly', () => {
-    const stacks = [
-      [1, 2, 3, 4, 5],
-      [],
-      []
-    ];
-
-    component.solve(stacks[0].length, stacks[0], stacks[2], stacks[1]);
-    expect(stacks[0]).toEqual([]);
-    expect(stacks[1]).toEqual([]);
-    expect(stacks[2]).toEqual([1, 2, 3, 4, 5]);
-  });
-
   it('should populate stacks[0] with specified height down to 1', () => {
     component.height = 7;
     component.stacks[1] = [1, 2];
-    component.resetStacks();
+    component.reset();
     expect(component.stacks[0]).toEqual([1, 2, 3, 4, 5, 6, 7]);
     expect(component.stacks[1]).toEqual([]);
     expect(component.stacks[2]).toEqual([]);
+    expect(component.solved).toBe(false);
+  });
+
+  it('should solve puzzle correctly', () => {
+    component.reset();
+
+    component.solve();
+    expect(component.stacks[0]).toEqual([]);
+    expect(component.stacks[1]).toEqual([]);
+    expect(component.stacks[2]).toEqual([1, 2, 3, 4, 5]);
   });
 });

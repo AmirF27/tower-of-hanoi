@@ -24,23 +24,15 @@ export class TowerOfHanoiComponent implements OnInit {
     'right'
   ];
 
+  solved: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
-    this.resetStacks();
+    this.reset();
   }
 
-  solve(n, source, target, auxiliary) {
-    if (n > 0) {
-      this.solve(n - 1, source, auxiliary, target);
-
-      target.unshift(source.shift());
-
-      this.solve(n - 1, auxiliary, target, source);
-    }
-  }
-
-  resetStacks() {
+  reset() {
     for (let index in this.stacks) {
       this.stacks[index] = [];
     }
@@ -48,6 +40,58 @@ export class TowerOfHanoiComponent implements OnInit {
     for (let i = +this.height; i >= 1; i--) {
       this.stacks[0].unshift(i);
     }
+
+    this.solved = false;
+  }
+
+  solve() {
+    if (!this.solved) {
+      if (this.height % 2 == 0) {
+        this.executeMoves(1, 2);
+      } else {
+        this.executeMoves(2, 1);
+      }
+    }
+  }
+
+  private executeMoves(first: number, second: number) {
+    while (!this.solved) {
+      this.makeMove(this.stacks[0], this.stacks[first]);
+      this.makeMove(this.stacks[0], this.stacks[second]);
+      this.makeMove(this.stacks[1], this.stacks[2]);
+    }
+  }
+
+  private makeMove(stack1: Array<number>, stack2: Array<number>) {
+    var { source, target } = this.determineLegalMove(stack1, stack2);
+
+    if (!this.checkSolved() && (source && target)) {
+      target.unshift(source.shift());
+    }
+  }
+
+  private determineLegalMove(stack1: Array<number>, stack2: Array<number>) {
+    let source = null;
+    let target = null;
+
+    if (stack1.length > 0) {
+      if (stack2.length == 0 || stack1[0] < stack2[0]) {
+        source = stack1;
+        target = stack2;
+      } else {
+        source = stack2;
+        target = stack1;
+      }
+    } else if (stack2.length > 0) {
+      source = stack2;
+      target = stack1;
+    }
+
+    return { source, target };
+  }
+
+  private checkSolved(): boolean {
+    return this.solved = this.stacks[2].length == this.height;
   }
 
 }

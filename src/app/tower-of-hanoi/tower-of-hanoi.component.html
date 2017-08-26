@@ -9,14 +9,14 @@
 </ng-container>
 
 <select [(ngModel)]="height"
-  (change)="resetStacks()"
+  (change)="reset()"
   class="input input--dropdown">
   <option *range="[5, 10]; let n"
     value="{{n}}"
     selected="n == height">{{n}}
   </option>
 </select>
-<button (click)="solve(stacks[0].length, stacks[0], stacks[2], stacks[1])"
+<button (click)="solve()"
   type="button"
   class="button button--primary">Solve
 </button>
