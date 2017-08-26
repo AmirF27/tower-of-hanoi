@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 const DEFAULT_HEIGHT = 5;
+const DEFAULT_DELAY = 300;
 
 @Component({
   selector: 'tower-of-hanoi',
@@ -26,6 +27,8 @@ export class TowerOfHanoiComponent implements OnInit {
 
   solved: boolean = false;
 
+  delay: number = DEFAULT_DELAY;
+
   constructor() { }
 
   ngOnInit() {
@@ -46,19 +49,25 @@ export class TowerOfHanoiComponent implements OnInit {
 
   solve() {
     if (!this.solved) {
-      if (this.height % 2 == 0) {
-        this.executeMoves(1, 2);
-      } else {
-        this.executeMoves(2, 1);
+      let first = 1, second = 2;
+      if (this.height % 2 != 0) {
+        [first, second] =  [second, first]
       }
+
+      let it = this.executeMoves(first, second);
+      let interval = setInterval(() => {
+        if (it.next().done) {
+          clearInterval(interval);
+        }
+      }, this.delay);
     }
   }
 
-  private executeMoves(first: number, second: number) {
+  private* executeMoves(first: number, second: number) {
     while (!this.solved) {
-      this.makeMove(this.stacks[0], this.stacks[first]);
-      this.makeMove(this.stacks[0], this.stacks[second]);
-      this.makeMove(this.stacks[1], this.stacks[2]);
+      yield this.makeMove(this.stacks[0], this.stacks[first]);
+      yield this.makeMove(this.stacks[0], this.stacks[second]);
+      yield this.makeMove(this.stacks[1], this.stacks[2]);
     }
   }
 

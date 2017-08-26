@@ -8,14 +8,27 @@
   </ul>
 </ng-container>
 
+<label for="height">Height:</label>
 <select [(ngModel)]="height"
   (change)="reset()"
-  class="input input--dropdown">
+  class="input input--dropdown"
+  id="height">
   <option *range="[5, 10]; let n"
     value="{{n}}"
     selected="n == height">{{n}}
   </option>
 </select>
+
+<label for="speed">Speed:</label>
+<select [(ngModel)]="delay"
+  class="input input--dropdown"
+  id="speed">
+  <option *range="[1, 5]; let n"
+    value="{{n * 300}}"
+    selected="n == delay">{{n}}
+  </option>
+</select>
+
 <button (click)="solve()"
   type="button"
   class="button button--primary">Solve
