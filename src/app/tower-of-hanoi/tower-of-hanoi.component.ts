@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 const DEFAULT_HEIGHT = 5;
 const DEFAULT_DELAY = 300;
+const MIN_DELAY = DEFAULT_DELAY;
 
 @Component({
   selector: 'tower-of-hanoi',
@@ -16,15 +17,24 @@ export class TowerOfHanoiComponent implements OnInit {
     []
   ];
   height: number = DEFAULT_HEIGHT;
+  delay: number = DEFAULT_DELAY;
+
+  private solving: boolean = false;
+  private solved: boolean = false;
   // for use with naming CSS classes for the stacks
-  stackNames = [
+  private stackNames = [
     'left',
     'middle',
     'right'
   ];
-  solving: boolean = false;
-  solved: boolean = false;
-  delay: number = DEFAULT_DELAY;
+  private speeds = [
+    'Very fast',
+    'Fast',
+    'Medium',
+    'Slow',
+    'Very slow'
+  ];
+  private minDelay = MIN_DELAY;
 
   constructor() { }
 
@@ -41,6 +51,7 @@ export class TowerOfHanoiComponent implements OnInit {
       this.stacks[0].unshift(i);
     }
 
+    this.solving = false;
     this.solved = false;
   }
 
@@ -52,7 +63,7 @@ export class TowerOfHanoiComponent implements OnInit {
 
       let moves = this.initiateMoves(first, second);
       let interval = setInterval(() => {
-        if (moves.next().done) {
+        if (!this.solving || moves.next().done) {
           clearInterval(interval);
           this.solving = false;
         }

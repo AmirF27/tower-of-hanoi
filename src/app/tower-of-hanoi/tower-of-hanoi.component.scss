@@ -43,11 +43,12 @@
   border-radius: $disk-border-radius;
   height: $disk-height;
   margin: 0 auto;
+  position: relative;
 }
 
 @for $i from 1 through 10 {
   .disk--#{$i} {
     background: nth($disk-colors, $i);
-    width: $i * $disk-width-factor;
+    width: $disk-min-width + ($disk-width-factor * ($i - 1));
   }
 }

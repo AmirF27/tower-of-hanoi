@@ -4,7 +4,9 @@
 
 <ng-container *ngFor="let stack of stacks; let i = index">
   <ul *ngIf="stack.length > 0" class="stack stack--{{stackNames[i]}}">
-    <li *ngFor="let disk of stack" class="disk disk--{{disk}}"></li>
+    <li *ngFor="let disk of stack"
+      class="disk disk--{{disk}} animation-speed-{{delay}}">
+    </li>
   </ul>
 </ng-container>
 
@@ -15,7 +17,8 @@
   id="height">
   <option *range="[5, 10]; let n"
     value="{{n}}"
-    selected="n == height">{{n}}
+    selected="n == height">
+    {{n}}
   </option>
 </select>
 
@@ -23,14 +26,20 @@
 <select [(ngModel)]="delay"
   class="input input--dropdown"
   id="speed">
-  <option *range="[1, 5]; let n"
-    value="{{n * 300}}"
-    selected="n == delay">{{n}}
+  <option *ngFor="let speed of speeds; let i = index"
+    value="{{(i + 1) * minDelay}}"
+    selected="(i + 1) * minDelay == delay">
+    {{speed}}
   </option>
 </select>
 
 <button (click)="solve()"
-  type="button"
   class="button button--primary"
-  [disabled]="solving || solved">Solve
+  [disabled]="solving || solved">
+  Solve
+</button>
+
+<button (click)="reset()"
+  class="button button--secondary">
+  Reset
 </button>

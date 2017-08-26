@@ -39,7 +39,6 @@ describe('TowerOfHanoiComponent', () => {
     expect(component.stacks[0]).toEqual([1, 2, 3, 4, 5, 6, 7]);
     expect(component.stacks[1]).toEqual([]);
     expect(component.stacks[2]).toEqual([]);
-    expect(component.solved).toBe(false);
   });
 
   it('should solve puzzle correctly', () => {
