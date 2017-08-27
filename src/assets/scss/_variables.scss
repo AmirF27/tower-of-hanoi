@@ -19,11 +19,12 @@ $disk-colors: (
 );
 
 $peg-border-radius: 10px;
-$peg-width: $disk-min-width - $disk-width-factor;
+$peg-color: #ff8b1c;
 $peg-height: $disk-height * $max-disks + $disk-height * 2;
-$peg-color: orange;
+$peg-width: $disk-min-width - $disk-width-factor;
 
 $peg-base-border-radius: 7px;
+$peg-base-color: darken($peg-color, 10%);
 $peg-base-height: $disk-height;
 $peg-base-width: $disk-min-width + $disk-width-factor * $max-disks;
 

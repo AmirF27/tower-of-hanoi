@@ -39,7 +39,6 @@
     <div *ngFor="let stack of stacks; let i = index"
       class="tower">
       <div class="peg"></div>
-      <div class="peg-base"></div>
       <div *ngIf="stack.length > 0" class="stack">
         <ul class="disk-group">
           <li *ngFor="let disk of stack"
@@ -48,5 +47,6 @@
         </ul>
       </div>
     </div>
+    <div class="peg-base"></div>
   </div>
 </main>

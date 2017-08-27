@@ -4,6 +4,7 @@
 
 .puzzle {
   height: $peg-height;
+  margin-top: 50px;
 }
 
 .tower {
@@ -23,23 +24,21 @@
   left: 0;
   margin: 0 auto;
   right:0;
-  position: absolute;
   top: 0;
+  position: absolute;
   width: $peg-width;
 }
 
 .peg-base {
   @include rounded-borders($peg-base-border-radius);
 
-  background: $peg-color;
+  background: $peg-base-color;
   bottom: 0;
   display: inline-block;
   height: $peg-base-height;
   left: 0;
-  margin: 0 auto;
-  right:0;
   position: absolute;
-  width: $peg-base-width;
+  right:0;
 }
 
 .stack {
@@ -48,8 +47,8 @@
   left: 0;
   position: absolute;
   right: 0;
-  transition: left 0.3s;
   top: 0;
+  transition: left 0.3s;
 }
 
 .disk-group {
@@ -66,6 +65,7 @@
   border-radius: $disk-border-radius;
   height: $disk-height;
   margin: 0 auto;
+  position: relative;
 }
 
 @for $i from 1 through 10 {
@@ -74,3 +74,43 @@
     width: calculate-disk-width($i);
   }
 }
+
+// @keyframes left-to-right {
+//   0% {
+//     bottom: 0;
+//   }
+//   40% {
+//     bottom: $peg-height - $disk-height * 5;
+//   }
+//   90% {
+//     bottom: $peg-height - $disk-height * 5;
+//   }
+//   100% {
+//     bottom: 0 - $disk-height * 4;
+//   }
+// }
+//
+// @keyframes position-5-to-1 {
+//   40% {
+//     left: 0;
+//   }
+//   90% {
+//     left: $tower-width * 2;
+//   }
+//   100% {
+//     left: $tower-width * 2;
+//   }
+// }
+//
+// .animation-speed--fast {
+//   animation-duration: .6s;
+// }
+//
+// .disk--1 {
+//   left: 0;
+//   animation-name: left-to-right, position-5-to-1;
+//   animation-fill-mode: forwards;
+//   animation-duration: .6s;
+//   animation-timing-function: linear;
+//   z-index: 50;
+// }

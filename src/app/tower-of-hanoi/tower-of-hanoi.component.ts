@@ -29,6 +29,7 @@ export class TowerOfHanoiComponent implements OnInit {
     'Very slow'
   ];
   private minDelay = MIN_DELAY;
+  private currentMove = null;
 
   constructor() { }
 
@@ -47,6 +48,7 @@ export class TowerOfHanoiComponent implements OnInit {
 
     this.solving = false;
     this.solved = false;
+    this.currentMove = null;
   }
 
   solve() {
@@ -57,7 +59,9 @@ export class TowerOfHanoiComponent implements OnInit {
 
       let moves = this.initiateMoves(first, second);
       let interval = setInterval(() => {
-        if (!this.solving || moves.next().done) {
+        let currentMove = moves.next();
+        this.currentMove = currentMove.value;
+        if (!this.solving || currentMove.done) {
           clearInterval(interval);
           this.solving = false;
         }
@@ -77,33 +81,36 @@ export class TowerOfHanoiComponent implements OnInit {
 
   private* initiateMoves(first: number, second: number) {
     while (!this.solved) {
-      yield this.makeMove(this.stacks[0], this.stacks[first]);
-      yield this.makeMove(this.stacks[0], this.stacks[second]);
-      yield this.makeMove(this.stacks[1], this.stacks[2]);
+      yield this.makeMove(0, first);
+      yield this.makeMove(0, second);
+      yield this.makeMove(1, 2);
     }
   }
 
-  private makeMove(stack1: Array<number>, stack2: Array<number>) {
+  private makeMove(stack1: number, stack2: number) {
     let { source, target } = this.determineLegalMove(stack1, stack2);
 
-    if (!this.checkSolved() && (source && target)) {
-      target.unshift(source.shift());
+    if (!this.checkSolved() && (source >= 0 && target >= 0)) {
+      this.stacks[target].unshift(this.stacks[source].shift());
     }
+
+    return { source, target };
   }
 
-  private determineLegalMove(stack1: Array<number>, stack2: Array<number>) {
-    let source = null;
-    let target = null;
+  private determineLegalMove(stack1: number, stack2: number) {
+    let source = -1;
+    let target = -1;
 
-    if (stack1.length > 0) {
-      if (stack2.length == 0 || stack1[0] < stack2[0]) {
+    if (this.stacks[stack1].length > 0) {
+      if (this.stacks[stack2].length == 0 ||
+          this.stacks[stack1][0] < this.stacks[stack2][0]) {
         source = stack1;
         target = stack2;
       } else {
         source = stack2;
         target = stack1;
       }
-    } else if (stack2.length > 0) {
+    } else if (this.stacks[stack2].length > 0) {
       source = stack2;
       target = stack1;
     }
