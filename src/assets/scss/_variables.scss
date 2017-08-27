@@ -1,11 +1,10 @@
-$peg-width: 80px;
-$peg-height: 400px;
-$peg-color: orange;
+$main-width: 960px;
 
 $disk-border-radius: 4px;
 $disk-height: 25px;
 $disk-min-width: $disk-height * 2;
 $disk-width-factor: 20;
+$max-disks: 10;
 $disk-colors: (
   #d80404, // disk 1 - red
   #7fd11b, // disk 2 - green
@@ -18,3 +17,15 @@ $disk-colors: (
   #849610, // disk 9 - olive
   #ffaa00  // disk 10 - orange
 );
+
+$peg-border-radius: 10px;
+$peg-width: $disk-min-width - $disk-width-factor;
+$peg-height: $disk-height * $max-disks + $disk-height * 2;
+$peg-color: orange;
+
+$peg-base-border-radius: 7px;
+$peg-base-height: $disk-height;
+$peg-base-width: $disk-min-width + $disk-width-factor * $max-disks;
+
+$tower-height: $disk-height * $max-disks;
+$tower-width: $main-width / 3;

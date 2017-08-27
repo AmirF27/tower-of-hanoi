@@ -1,0 +1,5 @@
+@import 'variables';
+
+@function calculate-disk-width($i) {
+  @return $disk-min-width + $disk-width-factor * ($i - 1);
+}

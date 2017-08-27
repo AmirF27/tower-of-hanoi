@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'assets/scss/variables';
+
+main {
+  margin: 0 auto;
+  position: relative;
+  width: $main-width;
+}

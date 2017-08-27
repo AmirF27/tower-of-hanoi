@@ -1,54 +1,76 @@
 @import '../../assets/scss/variables';
+@import '../../assets/scss/functions';
+@import '../../assets/scss/mixins';
 
-// .peg {
-//   background: $peg-color;
-//   display: inline-block;
-//   height: $peg-height;
-//   margin: $peg-width;
-//   width: $peg-width;
-// }
+.puzzle {
+  height: $peg-height;
+}
 
-.stack {
+.tower {
+  bottom: 0;
+  display: inline-block;
+  height: $peg-height;
+  position: relative;
+  width: $tower-width;
+}
+
+.peg {
+  @include rounded-borders($peg-border-radius, (top-left, top-right));
+
+  background: $peg-color;
   bottom: 0;
   display: inline-block;
   left: 0;
-  list-style-type: none;
+  margin: 0 auto;
+  right:0;
   position: absolute;
+  top: 0;
+  width: $peg-width;
+}
+
+.peg-base {
+  @include rounded-borders($peg-base-border-radius);
+
+  background: $peg-color;
+  bottom: 0;
+  display: inline-block;
+  height: $peg-base-height;
+  left: 0;
+  margin: 0 auto;
+  right:0;
+  position: absolute;
+  width: $peg-base-width;
+}
+
+.stack {
+  bottom: $peg-base-height;
+  display: inline-block;
+  left: 0;
+  position: absolute;
+  right: 0;
   transition: left 0.3s;
+  top: 0;
 }
 
-// @keyframes left-to-right {
-//   from {
-//     left: 0;
-//   }
-//
-//   to {
-//     left: 200px;
-//   }
-// }
-
-.stack--middle {
-  left: 300px;
-}
-
-.stack--right {
-  left: 600px;
-
-  // animation-name: left-to-right;
-  // animation-duration: 0.3s;
-  // animation-fill-mode: forwards;
+.disk-group {
+  bottom: 0;
+  left: 0;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  position: absolute;
+  right: 0;
 }
 
 .disk {
   border-radius: $disk-border-radius;
   height: $disk-height;
   margin: 0 auto;
-  position: relative;
 }
 
 @for $i from 1 through 10 {
   .disk--#{$i} {
     background: nth($disk-colors, $i);
-    width: $disk-min-width + ($disk-width-factor * ($i - 1));
+    width: calculate-disk-width($i);
   }
 }

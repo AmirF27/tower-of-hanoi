@@ -1,0 +1,9 @@
+@mixin rounded-borders($amount, $sides: null) {
+  @if $sides {
+    @each $side in $sides {
+      border-#{$side}-radius: $amount;
+    }
+  } @else {
+    border-radius: $amount;
+  }
+}

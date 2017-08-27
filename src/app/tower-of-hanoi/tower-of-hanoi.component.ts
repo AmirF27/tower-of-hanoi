@@ -21,12 +21,6 @@ export class TowerOfHanoiComponent implements OnInit {
 
   private solving: boolean = false;
   private solved: boolean = false;
-  // for use with naming CSS classes for the stacks
-  private stackNames = [
-    'left',
-    'middle',
-    'right'
-  ];
   private speeds = [
     'Very fast',
     'Fast',
