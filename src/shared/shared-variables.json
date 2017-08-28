@@ -1,0 +1,16 @@
+{
+  "animation-speeds": [
+    "very-fast",
+    "fast",
+    "medium",
+    "slow",
+    "very-slow"
+  ],
+  "stack-names": [
+    "left",
+    "middle",
+    "right"
+  ],
+  "default-delay": 300,
+  "min-delay": 300
+}

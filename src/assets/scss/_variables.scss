@@ -1,3 +1,5 @@
+@import '../../shared/shared-variables.json';
+
 $main-width: 960px;
 
 $disk-border-radius: 4px;
@@ -31,12 +33,4 @@ $peg-base-width: $disk-min-width + $disk-width-factor * $max-disks;
 $tower-height: $disk-height * $max-disks;
 $tower-width: $main-width / 3;
 
-$animation-speeds: (
-  very-fast,
-  fast,
-  medium,
-  slow,
-  very-slow
-);
-
-$animation-speed-interval: .3s;
+$animation-speed-interval: $min-delay * 0.001s;

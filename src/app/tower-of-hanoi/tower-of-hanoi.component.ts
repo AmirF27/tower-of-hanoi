@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+const sharedVars = require('../../shared/shared-variables.json');
+
 const DEFAULT_HEIGHT = 5;
-const DEFAULT_DELAY = 300;
-const MIN_DELAY = DEFAULT_DELAY;
+const DEFAULT_DELAY = sharedVars['default-delay'];
+const MIN_DELAY = sharedVars['min-delay'];
 
 @Component({
   selector: 'tower-of-hanoi',
@@ -21,18 +23,8 @@ export class TowerOfHanoiComponent implements OnInit {
 
   private solving: boolean = false;
   private solved: boolean = false;
-  private stackNames = [
-    'left',
-    'middle',
-    'right'
-  ];
-  private speeds = [
-    'Very fast',
-    'Fast',
-    'Medium',
-    'Slow',
-    'Very slow'
-  ];
+  private stackNames = sharedVars['stack-names'];
+  private speeds;
   private minDelay = MIN_DELAY;
   private currentMove = null;
   private interval;
@@ -41,6 +33,7 @@ export class TowerOfHanoiComponent implements OnInit {
 
   ngOnInit() {
     this.reset();
+    this.formatSpeeds();
   }
 
   reset() {
@@ -151,6 +144,12 @@ export class TowerOfHanoiComponent implements OnInit {
     className += ` animation-speed-${animationSpeed}`;
 
     return className;
+  }
+
+  private formatSpeeds() {
+    this.speeds = sharedVars['animation-speeds'].map(speed => {
+      return (speed.charAt(0).toUpperCase() + speed.slice(1)).replace('-', ' ');
+    });
   }
 
 }
