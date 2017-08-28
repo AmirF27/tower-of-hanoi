@@ -1,52 +1,51 @@
-<main>
-  <div class="controls">
-    <label for="height">Height:</label>
-    <select [(ngModel)]="height"
-      (change)="reset()"
-      class="input input--dropdown"
-      id="height">
-      <option *range="[5, 10]; let n"
-        value="{{n}}"
-        selected="n == height">
-        {{n}}
-      </option>
-    </select>
+<div class="controls">
+  <label for="height">Height:</label>
+  <select [(ngModel)]="height"
+    (change)="reset()"
+    class="input input--dropdown"
+    id="height">
+    <option *range="[5, 10]; let n"
+      value="{{n}}"
+      selected="n == height">
+      {{n}}
+    </option>
+  </select>
 
-    <label for="speed">Speed:</label>
-    <select [(ngModel)]="delay"
-      class="input input--dropdown"
-      id="speed">
-      <option *ngFor="let speed of speeds; let i = index"
-        value="{{(i + 1) * minDelay}}"
-        selected="(i + 1) * minDelay == delay">
-        {{speed}}
-      </option>
-    </select>
+  <label for="speed">Speed:</label>
+  <select [(ngModel)]="delay"
+    class="input input--dropdown"
+    id="speed">
+    <option *ngFor="let speed of speeds; let i = index"
+      value="{{(i + 1) * minDelay}}"
+      selected="(i + 1) * minDelay == delay">
+      {{speed}}
+    </option>
+  </select>
 
-    <button (click)="solve()"
-      class="button button--primary"
-      [disabled]="solving || solved">
-      Solve
-    </button>
+  <button (click)="solve()"
+    class="button button--primary"
+    [disabled]="solving || solved">
+    Solve
+  </button>
 
-    <button (click)="reset()"
-      class="button button--secondary">
-      Reset
-    </button>
-  </div>
+  <button (click)="reset()"
+    class="button button--secondary">
+    Reset
+  </button>
+</div>
 
-  <div class="puzzle">
-    <div *ngFor="let stack of stacks; let i = index"
-      class="tower">
-      <div class="peg"></div>
-      <div *ngIf="stack.length > 0" class="stack">
-        <ul class="disk-group">
-          <li *ngFor="let disk of stack"
-            class="disk disk--{{disk}} animation-speed-{{delay}}">
-          </li>
-        </ul>
-      </div>
+<div class="puzzle">
+  <div *ngFor="let stack of stacks; let i = index"
+    class="tower">
+    <div class="peg"></div>
+    <div *ngIf="stack.length > 0" class="stack">
+      <ul class="disk-group">
+        <li *ngFor="let disk of stack"
+          class="disk disk--{{disk}}"
+          [ngClass]="isCurrentMove(i, disk) ? getMoveAnimationClass() : ''">
+        </li>
+      </ul>
     </div>
-    <div class="peg-base"></div>
   </div>
-</main>
+  <div class="peg-base"></div>
+</div>

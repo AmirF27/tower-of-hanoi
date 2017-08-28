@@ -30,3 +30,13 @@ $peg-base-width: $disk-min-width + $disk-width-factor * $max-disks;
 
 $tower-height: $disk-height * $max-disks;
 $tower-width: $main-width / 3;
+
+$animation-speeds: (
+  very-fast,
+  fast,
+  medium,
+  slow,
+  very-slow
+);
+
+$animation-speed-interval: .3s;

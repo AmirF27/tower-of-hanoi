@@ -21,6 +21,11 @@ export class TowerOfHanoiComponent implements OnInit {
 
   private solving: boolean = false;
   private solved: boolean = false;
+  private stackNames = [
+    'left',
+    'middle',
+    'right'
+  ];
   private speeds = [
     'Very fast',
     'Fast',
@@ -30,6 +35,7 @@ export class TowerOfHanoiComponent implements OnInit {
   ];
   private minDelay = MIN_DELAY;
   private currentMove = null;
+  private interval;
 
   constructor() { }
 
@@ -49,6 +55,8 @@ export class TowerOfHanoiComponent implements OnInit {
     this.solving = false;
     this.solved = false;
     this.currentMove = null;
+
+    clearInterval(this.interval);
   }
 
   solve() {
@@ -58,12 +66,12 @@ export class TowerOfHanoiComponent implements OnInit {
       let { first, second } = this.determineMoveOrder();
 
       let moves = this.initiateMoves(first, second);
-      let interval = setInterval(() => {
+      this.interval = setInterval(() => {
         let currentMove = moves.next();
-        this.currentMove = currentMove.value;
         if (!this.solving || currentMove.done) {
-          clearInterval(interval);
-          this.solving = false;
+          clearInterval(this.interval);
+        } else {
+          this.currentMove = currentMove.value;
         }
       }, this.delay);
     }
@@ -90,7 +98,7 @@ export class TowerOfHanoiComponent implements OnInit {
   private makeMove(stack1: number, stack2: number) {
     let { source, target } = this.determineLegalMove(stack1, stack2);
 
-    if (!this.checkSolved() && (source >= 0 && target >= 0)) {
+    if (!this.checkSolved() && (source >= 0 && target >= 0) && this.solving) {
       this.stacks[target].unshift(this.stacks[source].shift());
     }
 
@@ -120,6 +128,29 @@ export class TowerOfHanoiComponent implements OnInit {
 
   private checkSolved(): boolean {
     return this.solved = this.stacks[2].length == this.height;
+  }
+
+  private isCurrentMove(stack: number, disk: number): boolean {
+    return this.currentMove
+      && stack == this.currentMove.target
+      && this.stacks[stack][0] == disk;
+  }
+
+  private getMoveAnimationClass(): string {
+    if (!this.currentMove) return '';
+
+    let className = `${this.stackNames[this.currentMove.source]}`;
+    className += `-${this.stackNames[this.currentMove.target]}`;
+    className += `-${this.stacks[this.currentMove.source].length + 1}`;
+    className += `-${this.stacks[this.currentMove.target].length}`;
+
+    let animationSpeed = this.speeds[this.delay / this.minDelay - 1]
+                         .toLowerCase()
+                         .replace(' ', '-');
+
+    className += ` animation-speed-${animationSpeed}`;
+
+    return className;
   }
 
 }

@@ -1,0 +1,41 @@
+@import 'variables';
+
+@for $i from 1 through length($animation-speeds) {
+  .animation-speed-#{nth($animation-speeds, $i)} {
+    animation-duration: $i * $animation-speed-interval;
+  }
+}
+
+@keyframes position-5-to-1 {
+  0% {
+    bottom: $disk-height * 5;
+  }
+  40% {
+    bottom: $peg-height - $disk-height * 1;
+  }
+  90% {
+    bottom: $peg-height - $disk-height * 1;
+  }
+  100% {
+    bottom: $disk-height * 1;
+  }
+}
+
+@keyframes left-to-right {
+  0% {
+    right: $tower-width * 2;
+  }
+  40% {
+    right: $tower-width * 2;
+  }
+  90% {
+    right: 0;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+.left-right-5-1 {
+  animation-name: left-to-right, position-5-to-1;
+}
