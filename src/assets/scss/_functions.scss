@@ -1,5 +1,19 @@
 @import 'variables';
 
-@function calculate-disk-width($i) {
-  @return $disk-min-width + $disk-width-factor * ($i - 1);
+@function calculate-disk-width($disk) {
+  @return $disk-min-width + $disk-width-factor * ($disk - 1);
+}
+
+@function calculate-start-position($source, $target) {
+  @return $disk-height * ($source - $target);
+}
+
+@function calculate-vertical-offset($disk) {
+  @return $peg-height - $disk-height * $disk;
+}
+
+@function calculate-horizontal-offset($source, $target) {
+  $offset: index($stack-names, $target) - index($stack-names, $source);
+
+  @return $tower-width * $offset;
 }

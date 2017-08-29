@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 @for $i from 1 through length($animation-speeds) {
   .animation-speed-#{nth($animation-speeds, $i)} {
@@ -6,36 +7,29 @@
   }
 }
 
-@keyframes position-5-to-1 {
-  0% {
-    bottom: $disk-height * 5;
-  }
-  40% {
-    bottom: $peg-height - $disk-height * 1;
-  }
-  90% {
-    bottom: $peg-height - $disk-height * 1;
-  }
-  100% {
-    bottom: $disk-height * 1;
+@for $disk1 from 1 through $max-disks {
+  @for $disk2 from 1 through $max-disks {
+    @include position-keyframes($disk1, $disk2);
+    @include position-keyframes($disk2, $disk1);
+
+    @each $stack1 in $stack-names {
+      @each $stack2 in $stack-names {
+        @if $stack1 != $stack2 {
+          @include animation-class($stack1, $stack2, $disk1, $disk2);
+          @include animation-class($stack1, $stack2, $disk2, $disk1);
+          @include animation-class($stack2, $stack1, $disk1, $disk2);
+          @include animation-class($stack2, $stack1, $disk2, $disk1);
+        }
+      }
+    }
   }
 }
 
-@keyframes left-to-right {
-  0% {
-    right: $tower-width * 2;
+@each $stack1 in $stack-names {
+  @each $stack2 in $stack-names {
+    @if $stack1 != $stack2 {
+      @include direction-keyframes($stack1, $stack2);
+      @include direction-keyframes($stack2, $stack1);
+    }
   }
-  40% {
-    right: $tower-width * 2;
-  }
-  90% {
-    right: 0;
-  }
-  100% {
-    right: 0;
-  }
-}
-
-.left-right-5-1 {
-  animation-name: left-to-right, position-5-to-1;
 }

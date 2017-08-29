@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'functions';
+
 @mixin rounded-borders($amount, $sides: null) {
   @if $sides {
     @each $side in $sides {
@@ -5,5 +8,45 @@
     }
   } @else {
     border-radius: $amount;
+  }
+}
+
+@mixin position-keyframes($source, $target) {
+  @keyframes position-#{$source}-to-#{$target} {
+    0% {
+      bottom: calculate-start-position($source, $target);
+    }
+    40% {
+      bottom: calculate-vertical-offset($target);
+    }
+    90% {
+      bottom: calculate-vertical-offset($target);
+    }
+    100% {
+      bottom: 0;
+    }
+  }
+}
+
+@mixin direction-keyframes($source, $target) {
+  @keyframes #{$source}-to-#{$target} {
+    0% {
+      right: calculate-horizontal-offset($source, $target);
+    }
+    40% {
+      right: calculate-horizontal-offset($source, $target);
+    }
+    90% {
+      right: 0;
+    }
+    100% {
+      right: 0;
+    }
+  }
+}
+
+@mixin animation-class($s-stack, $t-stack, $s-disk, $t-disk) {
+  .#{$s-stack}-#{$t-stack}-#{$s-disk}-#{$t-disk} {
+    animation-name: #{$s-stack}-to-#{$t-stack}, position-#{$s-disk}-to-#{$t-disk};
   }
 }
