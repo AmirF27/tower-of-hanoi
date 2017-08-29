@@ -8,7 +8,7 @@
     "test": "karma start ./karma.conf.js",
     "lint": "ng lint",
     "e2e": "protractor ./protractor.conf.js",
-    "start": "webpack-dev-server --port=4200",
+    "start": "webpack-dev-server --port=4200 --open",
     "pree2e": "webdriver-manager update --standalone false --gecko false --quiet"
   },
   "private": true,

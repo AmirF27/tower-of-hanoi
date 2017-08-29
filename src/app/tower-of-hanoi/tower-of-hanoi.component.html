@@ -14,7 +14,8 @@
   <label for="speed">Speed:</label>
   <select [(ngModel)]="delay"
     class="input input--dropdown"
-    id="speed">
+    id="speed"
+    [disabled]="solving">
     <option *ngFor="let speed of speeds; let i = index"
       value="{{(i + 1) * minDelay}}"
       selected="(i + 1) * minDelay == delay">

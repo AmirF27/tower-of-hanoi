@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 const sharedVars = require('../../shared/shared-variables.json');
 
+const START_STACK = 0;
+const MIDDLE_STACK = 1;
+const TARGET_STACK = 2;
 const DEFAULT_HEIGHT = 5;
 const DEFAULT_DELAY = sharedVars['default-delay'];
 const MIN_DELAY = sharedVars['min-delay'];
@@ -41,8 +44,8 @@ export class TowerOfHanoiComponent implements OnInit {
       this.stacks[index] = [];
     }
 
-    for (let i = +this.height; i >= 1; i--) {
-      this.stacks[0].unshift(i);
+    for (let i = 1; i <= +this.height; i++) {
+      this.stacks[START_STACK].push(i);
     }
 
     this.solving = false;
@@ -63,6 +66,7 @@ export class TowerOfHanoiComponent implements OnInit {
         let currentMove = moves.next();
         if (!this.solving || currentMove.done) {
           clearInterval(this.interval);
+          this.solving = false;
         } else {
           this.currentMove = currentMove.value;
         }
@@ -71,7 +75,7 @@ export class TowerOfHanoiComponent implements OnInit {
   }
 
   private determineMoveOrder() {
-    let [first, second] = [1, 2];
+    let [first, second] = [MIDDLE_STACK, TARGET_STACK];
 
     if (this.height % 2 != 0) {
       [first, second] = [second, first];
@@ -82,9 +86,9 @@ export class TowerOfHanoiComponent implements OnInit {
 
   private* initiateMoves(first: number, second: number) {
     while (!this.solved) {
-      yield this.makeMove(0, first);
-      yield this.makeMove(0, second);
-      yield this.makeMove(1, 2);
+      yield this.makeMove(START_STACK, first);
+      yield this.makeMove(START_STACK, second);
+      yield this.makeMove(MIDDLE_STACK, TARGET_STACK);
     }
   }
 
@@ -120,7 +124,7 @@ export class TowerOfHanoiComponent implements OnInit {
   }
 
   private checkSolved(): boolean {
-    return this.solved = this.stacks[2].length == this.height;
+    return this.solved = this.stacks[TARGET_STACK].length == this.height;
   }
 
   private isCurrentMove(stack: number, disk: number): boolean {
