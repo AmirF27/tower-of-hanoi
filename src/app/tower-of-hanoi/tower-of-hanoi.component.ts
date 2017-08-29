@@ -30,7 +30,7 @@ export class TowerOfHanoiComponent implements OnInit {
   private speeds;
   private minDelay = MIN_DELAY;
   private currentMove = null;
-  private interval;
+  private timeout;
 
   constructor() { }
 
@@ -52,7 +52,7 @@ export class TowerOfHanoiComponent implements OnInit {
     this.solved = false;
     this.currentMove = null;
 
-    clearInterval(this.interval);
+    clearInterval(this.timeout);
   }
 
   solve() {
@@ -60,11 +60,10 @@ export class TowerOfHanoiComponent implements OnInit {
       this.solving = true;
 
       let { first, second } = this.determineMoveOrder();
-
-      let moves = this.initiateMoves(first, second);
-
-      this.nextMove(moves);
-      this.interval = setInterval(this.nextMove.bind(this, moves), this.delay);
+      
+      // we only need to call nextMove once, and then setTimeout will handle
+      // subsequent calls recursively
+      this.nextMove(this.initiateMoves(first, second));
     }
   }
 
@@ -72,10 +71,11 @@ export class TowerOfHanoiComponent implements OnInit {
     let currentMove = moves.next();
 
     if (!this.solving || currentMove.done) {
-      clearInterval(this.interval);
+      clearTimeout(this.timeout);
       this.solving = false;
     } else {
       this.currentMove = currentMove.value;
+      this.timeout = setTimeout(this.nextMove.bind(this, moves), this.delay);
     }
   }
 
