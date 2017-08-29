@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 const sharedVars = require('../../shared/shared-variables.json');
 
 const START_STACK = 0;
-const MIDDLE_STACK = 1;
+const SPARE_STACK = 1;
 const TARGET_STACK = 2;
 const DEFAULT_HEIGHT = 5;
 const DEFAULT_DELAY = sharedVars['default-delay'];
@@ -62,20 +62,25 @@ export class TowerOfHanoiComponent implements OnInit {
       let { first, second } = this.determineMoveOrder();
 
       let moves = this.initiateMoves(first, second);
-      this.interval = setInterval(() => {
-        let currentMove = moves.next();
-        if (!this.solving || currentMove.done) {
-          clearInterval(this.interval);
-          this.solving = false;
-        } else {
-          this.currentMove = currentMove.value;
-        }
-      }, this.delay);
+
+      this.nextMove(moves);
+      this.interval = setInterval(this.nextMove.bind(this, moves), this.delay);
+    }
+  }
+
+  private nextMove(moves) {
+    let currentMove = moves.next();
+
+    if (!this.solving || currentMove.done) {
+      clearInterval(this.interval);
+      this.solving = false;
+    } else {
+      this.currentMove = currentMove.value;
     }
   }
 
   private determineMoveOrder() {
-    let [first, second] = [MIDDLE_STACK, TARGET_STACK];
+    let [first, second] = [SPARE_STACK, TARGET_STACK];
 
     if (this.height % 2 != 0) {
       [first, second] = [second, first];
@@ -88,7 +93,7 @@ export class TowerOfHanoiComponent implements OnInit {
     while (!this.solved) {
       yield this.makeMove(START_STACK, first);
       yield this.makeMove(START_STACK, second);
-      yield this.makeMove(MIDDLE_STACK, TARGET_STACK);
+      yield this.makeMove(SPARE_STACK, TARGET_STACK);
     }
   }
 
