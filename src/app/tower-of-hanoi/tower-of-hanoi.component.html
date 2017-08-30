@@ -1,8 +1,8 @@
-<div class="controls">
+<div class="options">
   <label for="height">Height:</label>
   <select [(ngModel)]="height"
     (change)="reset()"
-    class="input input--dropdown"
+    class="control dropdown"
     id="height">
     <option *range="[5, 10]; let n"
       value="{{n}}"
@@ -13,7 +13,7 @@
 
   <label for="speed">Speed:</label>
   <select [(ngModel)]="delay"
-    class="input input--dropdown"
+    class="control dropdown"
     id="speed"
     [disabled]="solving">
     <option *ngFor="let speed of speeds; let i = index"
@@ -24,13 +24,13 @@
   </select>
 
   <button (click)="solve()"
-    class="button button--primary"
+    class="control button button--primary"
     [disabled]="solving || solved">
     Solve
   </button>
 
   <button (click)="reset()"
-    class="button button--secondary">
+    class="control button button--default">
     Reset
   </button>
 </div>

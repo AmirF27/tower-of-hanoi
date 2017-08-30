@@ -1,12 +1,30 @@
 @import '../../shared/shared-variables.json';
 
+$white: #fff;
+$blue: #2a88ed;
+$green: #27af08;
+
+$control-default-color: $blue;
+$control-border-radius: 3px;
+$control-border-width: 2px;
+$control-height: 35px;
+$control-margin: 5px;
+$control-padding: 10px;
+$control-hover-color: $white;
+
+$btn-primary-color: $green;
+$btn-primary-hover-bg: lighten($btn-primary-color, 12%);
+$btn-primary-hover-color: darken($btn-primary-color, 12%);
+
 $main-width: 960px;
+
+$max-disks: 10;
 
 $disk-border-radius: 4px;
 $disk-height: 25px;
-$disk-min-width: $disk-height * 2;
+$disk-min-width: $disk-height * 2.25;
 $disk-width-factor: 20;
-$max-disks: 10;
+
 $disk-colors: (
   #d80404, // disk 1 - red
   #7fd11b, // disk 2 - green
@@ -23,11 +41,11 @@ $disk-colors: (
 $peg-border-radius: 10px;
 $peg-color: #ff8b1c;
 $peg-height: $disk-height * $max-disks + $disk-height * 2;
-$peg-width: $disk-min-width - $disk-width-factor;
+$peg-width: $disk-min-width / 2;
 
 $peg-base-border-radius: 7px;
 $peg-base-color: darken($peg-color, 10%);
-$peg-base-height: $disk-height;
+$peg-base-height: $peg-width * 1.25;
 $peg-base-width: $disk-min-width + $disk-width-factor * $max-disks;
 
 $tower-height: $disk-height * $max-disks;

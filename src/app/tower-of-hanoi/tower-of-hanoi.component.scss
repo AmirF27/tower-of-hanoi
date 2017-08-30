@@ -3,6 +3,73 @@
 @import '../../assets/scss/mixins';
 @import '../../assets/scss/animations';
 
+.options {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.control {
+  background: #fff;
+  border-radius: $control-border-radius;
+  border-width: $control-border-width;
+  border-style: solid;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  height: $control-height;
+  margin: $control-margin;
+  outline: none;
+  padding-left: $control-padding;
+  padding-right: $control-padding;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+}
+
+.control[disabled] {
+  cursor: not-allowed;
+}
+
+.button--primary {
+  background: #27af08;
+  border-color: $btn-primary-color;
+  color: $white;
+
+  &:hover,
+  &:active {
+    &:not([disabled]) {
+      background: $btn-primary-hover-bg;
+      border-color: $btn-primary-hover-color;
+      color: $btn-primary-hover-color;
+    }
+  }
+}
+
+.button--default,
+.dropdown {
+  border-color: $control-default-color;
+  color: $control-default-color;
+
+  &:hover,
+  &:active {
+    &:not([disabled]) {
+      background: $control-default-color;
+      color: $control-hover-color;
+    }
+  }
+
+  & option {
+    background: $control-hover-color;
+    color: #000;
+  }
+}
+
 .puzzle {
   height: $peg-height;
   margin-top: 50px;

@@ -47,6 +47,7 @@
 
 @mixin animation-class($s-stack, $t-stack, $s-disk, $t-disk) {
   .#{$s-stack}-#{$t-stack}-#{$s-disk}-#{$t-disk} {
-    animation-name: #{$s-stack}-to-#{$t-stack}, position-#{$s-disk}-to-#{$t-disk};
+    animation-name: #{$s-stack}-to-#{$t-stack},
+                    position-#{$s-disk}-to-#{$t-disk};
   }
 }
