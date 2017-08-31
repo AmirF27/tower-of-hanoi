@@ -1,8 +1,18 @@
 @import '../../shared/shared-variables.json';
 
+$wood: (
+  #e9dfc4,
+  #ede3c8,
+  #ebddc3,
+  #e6d8bd
+);
+
 $white: #fff;
 $blue: #2a88ed;
 $green: #27af08;
+$gray: #1f3554;
+
+$text-primary-color: $gray;
 
 $control-default-color: $blue;
 $control-border-radius: 3px;
@@ -39,8 +49,8 @@ $disk-colors: (
 );
 
 $peg-border-radius: 10px;
-$peg-color: #ff8b1c;
-$peg-height: $disk-height * $max-disks + $disk-height * 2;
+$peg-color: #e5a309;
+$peg-height: $disk-height * ($max-disks + 1);
 $peg-width: $disk-min-width / 2;
 
 $peg-base-border-radius: 7px;

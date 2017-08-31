@@ -9,7 +9,7 @@
 }
 
 @function calculate-vertical-offset($disk) {
-  @return $peg-height - $disk-height * $disk;
+  @return $peg-height - $disk-height * ($disk - 1);
 }
 
 @function calculate-horizontal-offset($source, $target) {

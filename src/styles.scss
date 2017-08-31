@@ -1,7 +1,11 @@
 @import 'assets/scss/variables';
 
 body {
+  background: url('./assets/images/wood-pattern-1920x1080.png');
+  // background-repeat: repeat;
+  color: $text-primary-color;
   font-family: 'Encode Sans', sans-serif;
+  margin: 0;
 }
 
 main {
