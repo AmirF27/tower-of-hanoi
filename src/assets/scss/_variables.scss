@@ -13,6 +13,7 @@ $green: #27af08;
 $gray: #1f3554;
 
 $text-primary-color: $gray;
+$link-color: lighten($text-primary-color, 15%);
 
 $control-default-color: $blue;
 $control-border-radius: 3px;
@@ -23,8 +24,8 @@ $control-padding: 10px;
 $control-hover-color: $white;
 
 $btn-primary-color: $green;
-$btn-primary-hover-bg: lighten($btn-primary-color, 12%);
-$btn-primary-hover-color: darken($btn-primary-color, 12%);
+$btn-primary-hover-bg: lighten($btn-primary-color, 30%);
+$btn-primary-hover-color: darken($btn-primary-color, 15%);
 
 $main-width: 960px;
 

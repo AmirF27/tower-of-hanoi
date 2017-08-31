@@ -64,7 +64,7 @@
     }
   }
 
-  & option {
+  option {
     background: $control-hover-color;
     color: #000;
   }
@@ -72,6 +72,7 @@
 
 .puzzle {
   height: $peg-height;
+  margin-bottom: $peg-base-height * 2;
   margin-top: $peg-base-height * 2;
 }
 
