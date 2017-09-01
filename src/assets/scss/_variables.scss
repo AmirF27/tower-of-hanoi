@@ -14,6 +14,13 @@ $gray: #1f3554;
 
 $text-primary-color: $gray;
 $link-color: lighten($text-primary-color, 15%);
+$link-hover-color: lighten($link-color, 10%);
+$link-shadow-color: lighten($link-hover-color, 15%);
+$link-shadow-blur: 5px;
+$link-shadow: 0 0 $link-shadow-blur $link-shadow-color;
+$link-underline-width: 1px;
+$link-underline-color: grayscale($link-color);
+$link-underline: $link-underline-width solid $link-underline-color;
 
 $control-default-color: $blue;
 $control-border-radius: 3px;
