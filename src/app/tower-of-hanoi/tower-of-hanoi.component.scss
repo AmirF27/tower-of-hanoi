@@ -9,13 +9,13 @@
 }
 
 .control {
-  background: #fff;
+  background: $control-default-bg;
   border-radius: $control-border-radius;
   border-width: $control-border-width;
   border-style: solid;
   font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: $control-font-size;
+  font-weight: $control-font-weight;
   height: $control-height;
   margin: $control-margin;
   outline: none;
@@ -37,7 +37,7 @@
 }
 
 .button--primary {
-  background: #27af08;
+  background: $btn-primary-color;
   border-color: $btn-primary-color;
   color: $white;
 
@@ -66,18 +66,18 @@
 
   option {
     background: $control-hover-color;
-    color: #000;
+    color: $text-primary-color;
   }
 }
 
 .puzzle {
-  height: $peg-height;
+  height: $peg-height + $peg-base-height;
   margin-bottom: $peg-base-height * 2;
   margin-top: $peg-base-height * 2;
 }
 
 .tower {
-  bottom: $peg-base-height;
+  bottom: 0;
   display: inline-block;
   height: $peg-height;
   position: relative;
@@ -89,6 +89,7 @@
 
   background: $peg-color;
   bottom: 0;
+  box-shadow: $default-box-shadow;
   display: inline-block;
   left: 0;
   margin: 0 auto;
@@ -103,10 +104,12 @@
 
   background: $peg-base-color;
   bottom: 0;
+  box-shadow: $default-box-shadow-bottom;
   height: $peg-base-height;
   left: 0;
   position: absolute;
   right:0;
+  z-index: 200;
 }
 
 .stack {
@@ -133,12 +136,13 @@
   animation-fill-mode: forwards;
   animation-timing-function: linear;
   border-radius: $disk-border-radius;
+  box-shadow: $default-box-shadow;
   height: $disk-height;
   margin: 0 auto;
   position: relative;
 }
 
-@for $i from 1 through 10 {
+@for $i from 1 through $max-disks {
   .disk--#{$i} {
     background: nth($disk-colors, $i);
     width: calculate-disk-width($i);
