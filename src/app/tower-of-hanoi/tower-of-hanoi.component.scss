@@ -86,8 +86,8 @@
 
 .peg {
   @include rounded-borders($peg-border-radius, (top-left, top-right));
+  @include circular-gradient($peg-color);
 
-  background: $peg-color;
   bottom: 0;
   box-shadow: $default-box-shadow;
   display: inline-block;
@@ -100,11 +100,18 @@
 }
 
 .peg-base {
-  @include rounded-borders($peg-base-border-radius);
+  @include rounded-borders($peg-base-border-radius * 2, (top-left, top-right));
+  @include rounded-borders($peg-base-border-radius, (bottom-left, bottom-right));
 
-  background: $peg-base-color;
+  background: $peg-color;
+  @include linear-gradient(180deg,
+                           lighten($peg-color, 10%) 0%,
+                           $peg-color 20%,
+                           $peg-color 80%,
+                           darken($peg-color, 10%) 100%);
+
   bottom: 0;
-  box-shadow: $default-box-shadow-bottom;
+  box-shadow: $default-box-shadow;
   height: $peg-base-height;
   left: 0;
   position: absolute;
@@ -144,7 +151,8 @@
 
 @for $i from 1 through $max-disks {
   .disk--#{$i} {
-    background: nth($disk-colors, $i);
+    @include circular-gradient(nth($disk-colors, $i));
+
     width: calculate-disk-width($i);
   }
 }

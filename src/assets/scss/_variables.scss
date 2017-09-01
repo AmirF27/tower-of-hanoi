@@ -56,14 +56,13 @@ $disk-colors: (
 );
 
 $peg-border-radius: 10px;
-$peg-color: #e5a309;
+$peg-color: #cc9208;
 $peg-height: $disk-height * ($max-disks + 1);
 $peg-width: $disk-min-width / 2;
 
 $peg-base-border-radius: 7px;
-$peg-base-color: darken($peg-color, 10%);
 $peg-base-height: $peg-width * 1.25;
-$peg-base-width: $disk-min-width + $disk-width-factor * $max-disks;
+$peg-base-width: $main-width;
 
 $tower-height: $disk-height * $max-disks;
 $tower-width: $main-width / 3;
@@ -71,4 +70,3 @@ $tower-width: $main-width / 3;
 $animation-speed-interval: $min-delay * 0.001s;
 
 $default-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
-$default-box-shadow-bottom: 0 5px 5px -5px rgba(0, 0, 0, .8);

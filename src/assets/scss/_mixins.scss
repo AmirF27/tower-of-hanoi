@@ -11,6 +11,28 @@
   }
 }
 
+@mixin linear-gradient($angle, $color-stops...) {
+  $angle-prefixed: (90 - $angle) % 360;
+
+  background: -webkit-linear-gradient($angle-prefixed, $color-stops);
+  background:    -moz-linear-gradient($angle-prefixed, $color-stops);
+  background:      -o-linear-gradient($angle-prefixed, $color-stops);
+  background:         linear-gradient($angle, $color-stops);
+}
+
+@mixin circular-gradient($color) {
+  $edge-color: darken($color, 10%);
+  $middle-color: lighten($color, 10%);
+
+  background: $color;
+  @include linear-gradient(90deg,
+                           $edge-color 0%,
+                           $color 10%,
+                           $middle-color 50%,
+                           $color 90%,
+                           $edge-color 100%);
+}
+
 @mixin position-keyframes($source, $target) {
   @keyframes position-#{$source}-to-#{$target} {
     0% {
