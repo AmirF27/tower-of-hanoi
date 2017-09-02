@@ -115,7 +115,8 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/styles.scss")
+          path.join(process.cwd(), "src/styles.scss"),
+          path.join(process.cwd(), "src/assets")
         ],
         "test": /\.css$/,
         "use": [

@@ -2,8 +2,9 @@
 
 body {
   /* Background from https://www.transparenttextures.com/wood-pattern.html */
-  background: url('./assets/images/wood-pattern-1920x1080.png');
+  background: url('./assets/images/wood-pattern.jpg');
   background-repeat: repeat;
+  background-size: cover;
   color: $text-primary-color;
   font-family: 'Encode Sans', sans-serif;
   margin: 0;

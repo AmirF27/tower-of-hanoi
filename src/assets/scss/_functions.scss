@@ -17,7 +17,3 @@
 
   @return $tower-width * $offset;
 }
-
-@function gradient-stop-length($size) {
-  @return $size / $gradient-stops;
-}
